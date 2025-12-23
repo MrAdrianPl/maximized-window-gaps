@@ -37,6 +37,7 @@ function onRegeometrized(client) {
     });
     client.fullScreenChanged.connect(() => {
         applyGaps(client);
+        if (client.fullScreen) restoreAreaOnFullscreenChanged(client);
     });
     client.maximizedChanged.connect(() => {
         applyGaps(client);
@@ -245,12 +246,22 @@ function nearArea(actual, expected, gap) {
         actual !== expected.gapped;
 }
 
+function restoreAreaOnFullscreenChanged(client) {
+
+    let clientArea = workspace.clientArea(KWin.MaximizeArea, client);
+    let win = client.frameGeometry;
+    win.x = clientArea.x;
+    win.y = clientArea.y;
+    win.width = clientArea.width;
+    win.height = clientArea.height;
+}
+
 function ignoreClient(client) {
     return !client
         ||
         !(client.normalWindow || ["plasma-interactiveconsole"].includes(String(client.resourceClass)))
         ||
-        ["plasmashell", "krunner"].includes(String(client.resourceClass))
+        ["plasmashell", "krunner", "ksmserver-logout-greeter"].includes(String(client.resourceClass))
         ||
         client.move || client.resize
         ||
