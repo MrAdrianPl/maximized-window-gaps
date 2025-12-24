@@ -248,7 +248,7 @@ function nearArea(actual, expected, gap) {
 
 function restoreAreaOnFullscreenChanged(client) {
 
-    let clientArea = workspace.clientArea(KWin.MaximizeArea, client);
+    let clientArea = workspace.clientArea(KWin.FullScreenArea, client);
     let win = client.frameGeometry;
     win.x = clientArea.x;
     win.y = clientArea.y;
