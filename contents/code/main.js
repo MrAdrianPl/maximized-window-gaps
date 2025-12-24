@@ -261,7 +261,7 @@ function ignoreClient(client) {
         ||
         !(client.normalWindow || ["plasma-interactiveconsole"].includes(String(client.resourceClass)))
         ||
-        ["plasmashell", "krunner", "ksmserver-logout-greeter"].includes(String(client.resourceClass))
+        ["plasmashell", "krunner", "ksmserver-logout-greeter","ksplashqml"].includes(String(client.resourceClass))
         ||
         client.move || client.resize
         ||
